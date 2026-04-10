@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char str[100];
+    int i;
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';
+
+    printf("Original  : %s\n", str);
+
+    /* With library function (toupper) */
+    for (i = 0; str[i]; i++)
+        str[i] = toupper((unsigned char)str[i]);
+    printf("Uppercase : %s\n", str);
+
+    /* Without toupper — manually check ASCII range */
+    /* Lowercase letters: 'a'(97) to 'z'(122)       */
+    /* Subtract 32 to get uppercase equivalent       */
+    char str2[100] = "hello world";
+    for (i = 0; str2[i]; i++)
+        if (str2[i] >= 'a' && str2[i] <= 'z')
+            str2[i] -= 32;
+    printf("Manual    : %s\n", str2);
+
+    return 0;
+}

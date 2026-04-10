@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int maximum(int a, int b) { return (a > b) ? a : b; }
+int minimum(int a, int b) { return (a < b) ? a : b; }
+
+int main() {
+    int a, b, result;
+
+    /* Pointer to function: returns int, takes two ints */
+    int (*funcPtr)(int, int);
+
+    printf("Enter two integers: ");
+    scanf("%d %d", &a, &b);
+
+    funcPtr = maximum;
+    result  = funcPtr(a, b);
+    printf("Maximum = %d\n", result);
+
+    funcPtr = minimum;
+    result  = funcPtr(a, b);
+    printf("Minimum = %d\n", result);
+
+    return 0;
+}

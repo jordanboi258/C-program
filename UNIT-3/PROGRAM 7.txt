@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define R 3
+#define C 3
+
+int main() {
+    int i, j;
+
+    /* Array of pointers: each pointer points to a row */
+    int *a[R], *b[R], *res[R];
+
+    for (i = 0; i < R; i++) {
+        a[i]   = (int *)malloc(C * sizeof(int));
+        b[i]   = (int *)malloc(C * sizeof(int));
+        res[i] = (int *)malloc(C * sizeof(int));
+    }
+
+    printf("Enter Matrix A (3x3):\n");
+    for (i = 0; i < R; i++)
+        for (j = 0; j < C; j++)
+            scanf("%d", a[i] + j);
+
+    printf("Enter Matrix B (3x3):\n");
+    for (i = 0; i < R; i++)
+        for (j = 0; j < C; j++)
+            scanf("%d", b[i] + j);
+
+    for (i = 0; i < R; i++)
+        for (j = 0; j < C; j++)
+            *(res[i] + j) = *(a[i] + j) + *(b[i] + j);
+
+    printf("\nResult (A + B):\n");
+    for (i = 0; i < R; i++) {
+        for (j = 0; j < C; j++)
+            printf("%5d", *(res[i] + j));
+        printf("\n");
+    }
+
+    for (i = 0; i < R; i++) {
+        free(a[i]); free(b[i]); free(res[i]);
+    }
+    return 0;
+}

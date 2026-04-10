@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char src[100], dst1[100], dst2[100];
+    int i;
+
+    printf("Enter source string: ");
+    fgets(src, sizeof(src), stdin);
+    src[strcspn(src, "\n")] = '\0';
+
+    /* With strcpy */
+    strcpy(dst1, src);
+    printf("Copied (strcpy): %s\n", dst1);
+
+    /* Without strcpy */
+    for (i = 0; src[i] != '\0'; i++)
+        dst2[i] = src[i];
+    dst2[i] = '\0';
+    printf("Copied (manual): %s\n", dst2);
+
+    /* Using pointer arithmetic */
+    char *p = src, *q = dst1;
+    while ((*q++ = *p++) != '\0');
+    printf("Copied (pointer): %s\n", dst1);
+
+    return 0;
+}
