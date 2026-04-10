@@ -1,0 +1,15 @@
+#include <stdio.h>
+int main() {
+    int m, n, i;
+    printf("Size of first array: "); scanf("%d", &m);
+    int a[m];
+    for (i = 0; i < m; i++) scanf("%d", &a[i]);
+    printf("Size of second array: "); scanf("%d", &n);
+    int b[n], merged[m + n];
+    for (i = 0; i < n; i++) scanf("%d", &b[i]);
+    for (i = 0; i < m; i++) merged[i] = a[i];
+    for (i = 0; i < n; i++) merged[m + i] = b[i];
+    printf("Merged: ");
+    for (i = 0; i < m + n; i++) printf("%d ", merged[i]);
+    return 0;
+}

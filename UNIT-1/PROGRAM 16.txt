@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char s1[100], s2[100];
+    printf("Enter first string: ");  fgets(s1, 100, stdin);
+    printf("Enter second string: "); fgets(s2, 100, stdin);
+    s1[strcspn(s1,"\n")]=0; s2[strcspn(s2,"\n")]=0;
+
+    /* With strcmp */
+    if (strcmp(s1, s2) == 0)
+        printf("Strings are SAME\n");
+    else
+        printf("Strings are DIFFERENT\n");
+
+    /* Without strcmp */
+    int i = 0, same = 1;
+    while (s1[i] != '\0' && s2[i] != '\0') {
+        if (s1[i] != s2[i]) { same = 0; break; }
+        i++;
+    }
+    if (s1[i] != s2[i]) same = 0;
+    printf("Manual check: %s\n", same ? "SAME" : "DIFFERENT");
+    return 0;
+}

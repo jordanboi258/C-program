@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str[100], rev[100];
+    int i, j = 0, len;
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';
+    len = strlen(str);
+
+    /* With string function */
+    char copy[100];
+    strcpy(copy, str);
+    // strrev is non-standard; manual reverse shown for portability
+    for (i = len - 1; i >= 0; i--) rev[j++] = str[i];
+    rev[j] = '\0';
+    printf("Reversed (manual): %s\n", rev);
+
+    /* Using strrev (MSVC / MinGW only) */
+    // strrev(copy);
+    // printf("Reversed (strrev): %s\n", copy);
+    return 0;
+}
