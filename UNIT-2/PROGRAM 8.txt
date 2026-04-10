@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+struct MyStruct {
+    int   i;   /* 4 bytes */
+    float f;   /* 4 bytes */
+    char  c;   /* 1 byte  */
+};
+
+union MyUnion {
+    int   i;   /* shares same memory */
+    float f;
+    char  c;
+};
+
+int main() {
+    struct MyStruct s;
+    union  MyUnion  u;
+
+    /* --- Structure: all members have their OWN memory --- */
+    s.i = 10;
+    s.f = 3.14f;
+    s.c = 'A';
+    printf("=== Structure ===\n");
+    printf("s.i = %d\n",   s.i);
+    printf("s.f = %.2f\n", s.f);
+    printf("s.c = %c\n",   s.c);
+    printf("sizeof(struct MyStruct) = %zu bytes\n", sizeof(s));
+
+    /* --- Union: all members SHARE the same memory ---
+       Writing to one member overwrites the others.    */
+    u.i = 65;
+    printf("\n=== Union (after u.i = 65) ===\n");
+    printf("u.i = %d\n",   u.i);
+    printf("u.f = %.2f\n", u.f);  /* garbage / overlap */
+    printf("u.c = %c\n",   u.c);  /* 65 = ASCII 'A'   */
+    printf("sizeof(union MyUnion) = %zu bytes\n", sizeof(u));
+
+    return 0;
+}
+
+/*
+Key differences:
+  Structure : size = sum of all members (+ padding)
+  Union     : size = size of its LARGEST member
+  Structure : changing one member does NOT affect others
+  Union     : changing one member DOES affect others
+*/

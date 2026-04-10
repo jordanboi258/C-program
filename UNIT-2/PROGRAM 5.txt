@@ -1,0 +1,39 @@
+#include <stdio.h>
+#define N 5
+
+struct student {
+    int   rollno;
+    char  name[20];
+    char  department[40];
+    int   year_of_joining;
+    float score;
+};
+
+void printHighScorers(struct student s[], int n, float cutoff) {
+    int i, found = 0;
+    printf("\nStudents with score > %.1f:\n", cutoff);
+    printf("-------------------------------\n");
+    for (i = 0; i < n; i++) {
+        if (s[i].score > cutoff) {
+            printf("  %-20s  %.2f\n", s[i].name, s[i].score);
+            found++;
+        }
+    }
+    if (!found)
+        printf("  No students found.\n");
+    else
+        printf("\nTotal: %d student(s)\n", found);
+}
+
+int main() {
+    struct student s[N] = {
+        {1, "Arjun",   "ECE", 2021, 91.0},
+        {2, "Bhavesh", "CSE", 2020,  4.5},
+        {3, "Meera",   "IT",  2023,  6.5},
+        {4, "Priya",   "ME",  2022,  3.0},
+        {5, "Zeynep",  "CSE", 2022,  8.5}
+    };
+
+    printHighScorers(s, N, 5.0);
+    return 0;
+}

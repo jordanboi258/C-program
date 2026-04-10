@@ -1,0 +1,37 @@
+#include <stdio.h>
+#define N 5
+
+struct student {
+    int   rollno;
+    char  name[20];
+    char  department[40];
+    int   year_of_joining;
+    float score;
+};
+
+void inputStudent(struct student *s, int i) {
+    printf("\n--- Student %d ---\n", i + 1);
+    printf("Roll No        : "); scanf("%d", &s->rollno);
+    printf("Name           : "); scanf(" %19[^\n]", s->name);
+    printf("Department     : "); scanf(" %39[^\n]", s->department);
+    printf("Year of Joining: "); scanf("%d", &s->year_of_joining);
+    printf("Score          : "); scanf("%f", &s->score);
+}
+
+void displayStudent(struct student s) {
+    printf("\nRoll No        : %d",   s.rollno);
+    printf("\nName           : %s",   s.name);
+    printf("\nDepartment     : %s",   s.department);
+    printf("\nYear of Joining: %d",   s.year_of_joining);
+    printf("\nScore          : %.2f\n", s.score);
+    printf("---------------------------\n");
+}
+
+int main() {
+    struct student s[N];
+    int i;
+    for (i = 0; i < N; i++) inputStudent(&s[i], i);
+    printf("\n===== All Student Records =====\n");
+    for (i = 0; i < N; i++) displayStudent(s[i]);
+    return 0;
+}

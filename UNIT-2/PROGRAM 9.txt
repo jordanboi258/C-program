@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+struct date {
+    int day;
+    int month;
+    int year;
+};
+
+int compareDates(struct date d1, struct date d2) {
+    if (d1.year  != d2.year)  return d1.year  - d2.year;
+    if (d1.month != d2.month) return d1.month - d2.month;
+    return d1.day - d2.day;
+}
+
+void printDate(struct date d) {
+    printf("%02d/%02d/%04d", d.day, d.month, d.year);
+}
+
+int main() {
+    struct date d1, d2;
+    int result;
+
+    printf("Enter Date 1 (dd mm yyyy): ");
+    scanf("%d %d %d", &d1.day, &d1.month, &d1.year);
+
+    printf("Enter Date 2 (dd mm yyyy): ");
+    scanf("%d %d %d", &d2.day, &d2.month, &d2.year);
+
+    result = compareDates(d1, d2);
+
+    printf("\nDate 1 : "); printDate(d1);
+    printf("\nDate 2 : "); printDate(d2);
+    printf("\nResult : ");
+
+    if (result == 0)
+        printf("Dates are EQUAL\n");
+    else if (result < 0)
+        printf("Date 1 is EARLIER than Date 2\n");
+    else
+        printf("Date 1 is LATER than Date 2\n");
+
+    return 0;
+}

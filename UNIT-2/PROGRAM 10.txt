@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+/* Inner structures */
+struct date {
+    int day, month, year;
+};
+
+struct address {
+    char city[30];
+    char state[30];
+    int  pincode;
+};
+
+/* Outer structure containing inner structures */
+struct student {
+    int            rollno;
+    char           name[20];
+    struct date    dob;       /* nested: date of birth */
+    struct address addr;      /* nested: address       */
+    float          score;
+};
+
+void inputStudent(struct student *s) {
+    printf("Roll No        : "); scanf("%d", &s->rollno);
+    printf("Name           : "); scanf(" %19[^\n]", s->name);
+
+    printf("DOB (dd mm yyyy): ");
+    scanf("%d %d %d", &s->dob.day, &s->dob.month, &s->dob.year);
+
+    printf("City           : "); scanf(" %29[^\n]", s->addr.city);
+    printf("State          : "); scanf(" %29[^\n]", s->addr.state);
+    printf("Pincode        : "); scanf("%d", &s->addr.pincode);
+
+    printf("Score          : "); scanf("%f", &s->score);
+}
+
+void displayStudent(struct student s) {
+    printf("\n--- Student Record ---\n");
+    printf("Roll No  : %d\n",   s.rollno);
+    printf("Name     : %s\n",   s.name);
+    printf("DOB      : %02d/%02d/%04d\n",
+           s.dob.day, s.dob.month, s.dob.year);
+    printf("City     : %s\n",   s.addr.city);
+    printf("State    : %s\n",   s.addr.state);
+    printf("Pincode  : %d\n",   s.addr.pincode);
+    printf("Score    : %.2f\n", s.score);
+    printf("----------------------\n");
+}
+
+int main() {
+    struct student s;
+    inputStudent(&s);
+    displayStudent(s);
+    return 0;
+}
